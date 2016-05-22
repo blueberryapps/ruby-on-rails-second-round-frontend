@@ -18,10 +18,4 @@ describe('configureStore', () => {
       expect(typeof store.asyncReducers).toEqual('object');
     });
   });
-
-  describe('runSaga', () => {
-    it('should contain a hook for `sagaMiddleware.run`', () => {
-      expect(typeof store.runSaga).toEqual('function');
-    });
-  });
 });

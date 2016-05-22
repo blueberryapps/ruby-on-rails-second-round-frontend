@@ -3,6 +3,10 @@
  * If we were to do this in store.js, reducers wouldn't be hot reloadable.
  */
 
+import apiReducer from 'common/api/reducer';
+import fieldsReducer from 'common/fields/reducer';
+import invoicesReducer from 'common/invoices/reducer';
+import summaryReducer from 'common/summary/reducer';
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
@@ -40,7 +44,11 @@ function routeReducer(state = routeInitialState, action) {
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
+    api: apiReducer,
+    fields: fieldsReducer,
     route: routeReducer,
+    summary: summaryReducer,
+    invoices: invoicesReducer,
     ...asyncReducers,
   });
 }

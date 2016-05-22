@@ -14,7 +14,7 @@ const loadModule = (cb) => (componentModule) => {
 
 export default function createRoutes() {
   // Create reusable async injectors using getHooks factory
-  // const { injectReducer, injectSagas } = getHooks(store);
+  // const { injectReducer } = getHooks(store);
 
   return [
     {
@@ -22,7 +22,7 @@ export default function createRoutes() {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('components/HomePage'),
+          System.import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
@@ -33,7 +33,25 @@ export default function createRoutes() {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
+      path: '/invoices/:invoiceId',
+      name: 'invoice',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/InvoiceDetail'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

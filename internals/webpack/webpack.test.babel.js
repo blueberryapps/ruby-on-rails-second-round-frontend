@@ -13,6 +13,7 @@ module.exports = {
   devtool: 'inline-source-map',
   isparta: {
     babel: {
+      plugins: ['babel-plugin-transform-decorators-legacy'],
       presets: ['es2015', 'react', 'stage-0'],
     },
   },

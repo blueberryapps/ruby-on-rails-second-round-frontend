@@ -1,16 +1,15 @@
 /* eslint consistent-return:0 */
-
+const stubbedApi = require('./api/stubbedApi');
 const express = require('express');
 const logger = require('./logger');
-const ngrok = require('ngrok');
 
 const frontend = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
 
 const app = express();
 
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+app.use('/api', stubbedApi());
+app.use(express.static('public'));
 
 // Initialize frontend middleware that will serve your JS app
 const webpackConfig = isDev
@@ -29,7 +28,7 @@ app.listen(port, (err) => {
 
   // Connect to ngrok in dev mode
   if (isDev) {
-    ngrok.connect(port, (innerErr, url) => {
+    require('ngrok').connect(port, (innerErr, url) => {
       if (innerErr) {
         return logger.error(innerErr);
       }
