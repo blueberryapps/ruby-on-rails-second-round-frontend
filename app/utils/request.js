@@ -9,10 +9,7 @@ import 'whatwg-fetch';
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  const opt = options || {
-    mode: 'no-cors',
-  };
-  return fetch(url, opt)
+  return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => ({ data }));
