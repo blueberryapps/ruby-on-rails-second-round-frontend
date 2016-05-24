@@ -18,15 +18,6 @@ export default class HomePage extends React.Component {
     const { dispatch } = this.props;
     dispatch(fetchSummaryByMonths());
     dispatch(fetchSummaryByCategories());
-
-    this.interval = setInterval(() => {
-      dispatch(fetchSummaryByMonths());
-      dispatch(fetchSummaryByCategories());
-    }, 2000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   render() {

@@ -5,7 +5,5 @@ const fieldsSelector =
 
 export const apiUrlFieldSelector = createSelector(
   fieldsSelector,
-  fields => ({
-    apiUrlField: fields.get('apiUrl'),
-  })
+  fields => fields.get('apiUrl')
 );

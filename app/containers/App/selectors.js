@@ -1,3 +1,7 @@
+import { createSelector } from 'reselect';
+import { apiUrlFieldSelector } from '../../common/fields/selectors';
+import { autoFetchSelector } from '../../common/api/selectors';
+
 // selectLocationState expects a plain JS object for the routing state
 export function selectLocationState() {
   let prevRoutingState;
@@ -14,3 +18,12 @@ export function selectLocationState() {
     return prevRoutingStateJS;
   };
 }
+
+export const appSelector = createSelector(
+  apiUrlFieldSelector,
+  autoFetchSelector,
+  (apiUrlField, autoFetch) => ({
+    apiUrlField,
+    autoFetch,
+  })
+);

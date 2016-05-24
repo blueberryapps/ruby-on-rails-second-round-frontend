@@ -18,14 +18,6 @@ export default class Invoices extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchInvoices());
-
-    this.interval = setInterval(() => {
-      dispatch(fetchInvoices());
-    }, 2000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   renderRow(invoice) {
